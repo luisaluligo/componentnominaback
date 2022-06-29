@@ -16,7 +16,7 @@ class TipoNovedadCreateView(generics.CreateAPIView):
        token = request.META.get('HTTP_AUTHORIZATION')[7:]
        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
        valid_data = tokenBackend.decode(token, verify=False)
-       return Response(request.data['tipo_novedad'].user)
+       return Response(request.data['tipo_novedad']['user'])
        if valid_data['user_id'] != int(request.data['user']):
               stringResponse = {'detail': 'Unauthorized Request'}
               return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
