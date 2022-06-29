@@ -16,12 +16,12 @@ class TipoNovedadCreateView(generics.CreateAPIView):
        token = request.META.get('HTTP_AUTHORIZATION')[7:]
        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
        valid_data = tokenBackend.decode(token, verify=False)
-       return Response(request.data['tipo_novedad']['user'])
-       if valid_data['user_id'] != int(request.data['user']):
+       
+       if valid_data['user_id'] != int(request.data['tipo_novedad']['user']):
               stringResponse = {'detail': 'Unauthorized Request'}
               return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
 
-       serializer = TipoNovedadSerializer(data=request.data['tiponovedad_data'])
+       serializer = TipoNovedadSerializer(data=request.data['tipo_novedad']['tiponovedad_data'])
        serializer.is_valid(raise_exception = True)
        serializer.save()
        
