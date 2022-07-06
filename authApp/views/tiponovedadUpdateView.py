@@ -21,6 +21,6 @@ class TiponovedadUpdateView(generics.UpdateAPIView):
         if valid_data['user_id'] != kwargs['user']:
             stringResponse = {'detail': 'Unauthorized Request'}
             return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED) 
-        return super().destroy(request, *args, **kwargs)
+        return super().update(request, *args, **kwargs)
 
        
